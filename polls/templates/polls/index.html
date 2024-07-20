@@ -1,0 +1,22 @@
+{% extends 'polls/base.html' %}
+
+{% block content123 %}
+    <h1>Day la template</h1>
+    <p>Chao cac ban minh la <b>{{ name }} {{ first_name }} {{ last_name }}</b></p>
+    <h2>Tai san cua toi gom: </h2>
+<ul>
+    {% for item in taisan %}
+        {% if item != 'May Tinh' %}
+            <li>{{ item }}</li>
+        {% endif %}
+    {% endfor %}
+</ul>
+    <h2>Co tai san cua toi gom: </h2>
+<ul>
+    {% for item in cotaisan %}
+        {% if item != 'May Tinh2' %}
+            <li>{{ item }}</li>
+        {% endif %}
+    {% endfor %}
+</ul>
+{% endblock %}

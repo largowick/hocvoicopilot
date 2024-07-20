@@ -1,0 +1,9 @@
+{% extends "polls/base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content123 %}
+  <h2>{{ post.title }}</h2>
+  <img src="{{ post.image.url }}" alt="{{ post.title }}" style="width: 100%; max-width: 600px;">
+  <p>{{ post.body }}</p>
+{% endblock %}

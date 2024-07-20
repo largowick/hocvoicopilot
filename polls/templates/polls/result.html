@@ -1,0 +1,11 @@
+{% extends 'polls/base.html' %}
+{% block content123 %}
+    {% if q %}
+        <h1>{{ q.question_text }}</h1>
+        <p>Ket qua cua cuoc binh chon</p>
+        {% for item in q.choice_set.all %}
+            <p>{{ item.choice_text }}: <span style="color:red;">{{item.vote}}</span> </p>
+        {% endfor %}
+        <a href="{% url 'polls:view_list'%}">Vote tiep</a>
+    {% endif %}
+{% endblock %}

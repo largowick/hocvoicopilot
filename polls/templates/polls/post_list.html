@@ -1,0 +1,12 @@
+{% extends "polls/base.html" %}
+
+{% block content123 %}
+  <h2>Danh sách bài đăng</h2>
+  <ul>
+    {% for post in posts %}
+      <li>
+        <h3><a href="{% url 'polls:post' post.id %}">{{ post.title }}</a></h3>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

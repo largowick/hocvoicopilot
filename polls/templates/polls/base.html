@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .header{
+            padding: 30px;
+            background-color: #ff984f;
+            color: #FFF;
+        }
+        .menu{
+            background-color: #610d0d;
+            color: #FFF;
+        }
+        .menu ul li {
+            float: left;
+            padding: 6px 7px;
+        }
+        .menu ul{
+            list-style-type: none;
+        }
+        .menu ul li:hover{
+            background-color: blueviolet;
+            color:  blueviolet;
+        }
+        .menu:after{
+            clear: both;
+            display: table;
+            content: "";
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="header" style="min-height:35%">
+    <h1>My Website Django</h1>
+    <div class="menu" style="min-height:5%; background-color:#CCC;">
+        <a href="#">Link1</a>|<a href="#">Link2</a>|<a href="#">Link3</a>
+    </div>
+    <div class="col-sm-3">
+    {% if user.username %}
+        <p> Xin chào {{user.username}}</p>
+        <p><a href="{% url 'polls:logout' %}"> Đăng xuất </a></p>
+    {% else %}
+        <a href=" {% url 'polls:register' %}">Đăng ký</a>|<a href=" {% url 'polls:login' %}">Đăng nhập</a>
+    {% endif %}
+    </div>
+</div>
+<div class="noidung" style="min-height:55%">
+    {% block content123 %}
+    {% endblock %}
+</div>
+</body>
+</html>
