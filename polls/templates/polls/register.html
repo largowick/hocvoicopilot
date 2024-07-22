@@ -7,12 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    <center>
+    <div style="text-align: center;">
         <form action='.' method='POST'>
             {% csrf_token %}
             {{form.as_p}}
             <input type="submit" value="Đăng ký"/>
         </form>
-    </center>
+    </div>
 </body>
 </html>

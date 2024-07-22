@@ -74,3 +74,20 @@ def post_detail(request, post_id):
 def post_list(request):
     posts = Post.objects.all()
     return render(request, 'polls/post_list.html', {'posts': posts})
+
+from django.shortcuts import render, redirect
+from .forms import PostForm
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def create_post(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user  # Set the post's user to the current user
+            post.save()
+            return redirect('some_view')
+    else:
+        form = PostForm()
+    return render(request, 'polls/post_create.html', {'form': form})
