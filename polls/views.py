@@ -87,7 +87,7 @@ def create_post(request):
             post = form.save(commit=False)
             post.user = request.user  # Set the post's user to the current user
             post.save()
-            return redirect('some_view')
+            return redirect('polls:post_list')  # Redirect to the post list after saving
     else:
         form = PostForm()
     return render(request, 'polls/post_create.html', {'form': form})
