@@ -1,9 +1,10 @@
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
 from .models import Question
 from .forms import RegistrationForm
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect
+from .models import Post
+from django.urls import reverse
+from django.contrib.auth import authenticate, login, logout
 
 
 def index(request):
@@ -22,7 +23,6 @@ def index(request):
 
 
 def viewlist(request):
-    #get_object_or_404(request)
     list_question = Question.objects.all()
     context = {"dsquest": list_question}
     return render(request, "polls/question_list.html", context)
@@ -31,9 +31,6 @@ def viewlist(request):
 def detailView(request, question_id):
     q = Question.objects.get(pk=question_id)
     return render(request, "polls/detail_question.html", {"qs": q})
-
-
-from django.http import HttpResponse, HttpResponseRedirect
 
 
 def vote(request, question_id):
@@ -49,35 +46,64 @@ def vote(request, question_id):
 
 
 def register(request):
-    form = RegistrationForm()
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/')
+            new_user = form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')  # Assuming the form has a password1 field for the password
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect(reverse('index'))  # Redirect to a named URL; adjust as needed
+    else:
+        form = RegistrationForm()
     return render(request, 'polls/register.html', {'form': form})
 
-from .models import Post
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            # Redirect to a success page.
+            return HttpResponseRedirect(reverse('index'))  # Assuming 'index' is the name of your home page view
+        else:
+            # Return an 'invalid login' error message.
+            return render(request, 'polls/login.html', {'error_message': 'Invalid login'})
+    else:
+        return render(request, 'polls/login.html')
+
+
+def logout_view(request):
+    """
+    Log out the user and redirect to the home page.
+    """
+    logout(request)
+    return redirect('/')  # Redirect to home page
+
 
 def post(request, post_id):
-    post = get_object_or_404(Post, pk=post_id)
-    return render(request, "polls/post.html", {"post": post})
-
-# polls/views.py
-
+    postg = get_object_or_404(Post, pk=post_id)
+    return render(request, "polls/post.html", {"post": postg})
 
 
 def post_detail(request, post_id):
-    post = get_object_or_404(Post, pk=post_id)
-    return render(request, 'polls/post.html', {'post': post})
+    postg = get_object_or_404(Post, pk=post_id)
+    return render(request, 'polls/post.html', {'post': postg})
+
 
 def post_list(request):
     posts = Post.objects.all()
     return render(request, 'polls/post_list.html', {'posts': posts})
 
+
 from django.shortcuts import render, redirect
 from .forms import PostForm
 from django.contrib.auth.decorators import login_required
+
 
 @login_required
 def create_post(request):

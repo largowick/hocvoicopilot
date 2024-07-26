@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .header{
             padding: 30px;
@@ -29,8 +30,6 @@
             display: table;
             content: "";
         }
-
-
     </style>
 </head>
 <body>
@@ -41,16 +40,21 @@
     </div>
     <div class="col-sm-3">
     {% if user.username %}
+    {% else %}
+    {% endif %}
+        <a href=" {% url 'polls:register' %}">Đăng ký</a>|<a href=" {% url 'polls:login' %}">Đăng nhập</a>
         <p> Xin chào {{user.username}}</p>
         <p><a href="{% url 'polls:logout' %}"> Đăng xuất </a></p>
-    {% else %}
-        <a href=" {% url 'polls:register' %}">Đăng ký</a>|<a href=" {% url 'polls:login' %}">Đăng nhập</a>
-    {% endif %}
     </div>
 </div>
 <div class="noidung" style="min-height:55%">
     {% block content123 %}
     {% endblock %}
 </div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
