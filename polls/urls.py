@@ -14,7 +14,10 @@ urlpatterns = [
     #path('register/',views.register.as_view(template_name="polls/register.html"), name="register"),
     path('login/', auth_views.LoginView.as_view(template_name="polls/login.html"), name="login"),
     path('logout/', logout_view, name='logout'),
-    path('post/<int:post_id>/', views.post, name='post'),
+    #path('post/<int:post_id>/', views.post, name='post'),
+    path('post/<int:post_id>/', views.post_detail, name='post_detail'),
     path('posts/', views.post_list, name='post_list'),
     path('create-post/', views.create_post, name='create_post'),
+    path('gemini/', views.some_view, name='gemini'),
+    path('gemini/question/', views.gemini_question_view, name='gemini_question'),
 ]

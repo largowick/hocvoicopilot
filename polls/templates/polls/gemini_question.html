@@ -1,0 +1,14 @@
+{% extends "polls/base.html" %}
+
+{% block content %}
+  <h2>Nhập câu hỏi cho Gemini</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Gửi</button>
+  </form>
+  {% if answer %}
+    <h3>Câu trả lời:</h3>
+    <pre>{{ answer|safe }}</pre>
+  {% endif %}
+{% endblock %}

@@ -40,3 +40,7 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'body', 'image']
+
+
+class GeminiQuestionForm(forms.Form):
+    question = forms.CharField(label='Câu hỏi', max_length=255)

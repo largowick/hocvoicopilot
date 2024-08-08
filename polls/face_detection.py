@@ -11,6 +11,8 @@ def detect_faces(image_path):
     face_cascade = cv2.CascadeClassifier(cascade_path)
 
     # Kiểm tra xem tệp ảnh có tồn tại không
+    image_path = 'media/posts/images/a_Tuân.jpg'
+
     if not os.path.exists(image_path):
         raise FileNotFoundError(f"Image file not found: {image_path}")
 
@@ -46,6 +48,3 @@ def detect_faces(image_path):
     cv2.destroyAllWindows()
 
     return face_list
-
-# Gọi hàm detect_faces với đường dẫn tới tệp ảnh của bạn
-detect_faces('D:\TL\Project-master\media\posts\images')

@@ -1,4 +1,4 @@
-<!-- post.html -->
+<!-- polls/templates/polls/post_detail.html -->
 {% extends "polls/base.html" %}
 
 {% block title %}{{ post.title }}{% endblock %}
@@ -8,9 +8,9 @@
   <img src="{{ post.image.url }}" alt="{{ post.title }}" style="width: 100%; max-width: 600px;">
   <p>{{ post.body }}</p>
 
-  {% if face_detection_success %}
-    <p>Face detection was successful!</p>
-  {% else %}
-    <p>No faces detected.</p>
+<!--  {% if face_detection_success %}-->
+<!--    <p>Face detection was successful!</p>-->
+<!--  {% else %}-->
+<!--    <p>No faces detected.</p>-->
   {% endif %}
 {% endblock %}

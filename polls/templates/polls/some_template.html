@@ -1,0 +1,18 @@
+<!-- polls/templates/polls/some_template.html -->
+<!-- polls/templates/polls/some_template.html -->
+{% extends "polls/base.html" %}
+
+{% block content %}
+  <h2>Gemini Data</h2>
+  {% if gemini_data %}
+    <p><strong>Bid:</strong> {{ gemini_data.bid }}</p>
+    <p><strong>Ask:</strong> {{ gemini_data.ask }}</p>
+    <p><strong>Last:</strong> {{ gemini_data.last }}</p>
+    <h3>Volume</h3>
+    <p><strong>BTC:</strong> {{ gemini_data.volume.BTC }}</p>
+    <p><strong>USD:</strong> {{ gemini_data.volume.USD }}</p>
+    <p><strong>Timestamp:</strong> {{ gemini_data.volume.timestamp }}</p>
+  {% else %}
+    <p>No data returned from Gemini API</p>
+  {% endif %}
+{% endblock %}
